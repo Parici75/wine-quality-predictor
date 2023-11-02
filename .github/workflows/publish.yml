@@ -20,7 +20,7 @@ jobs:
     - name: Get version
       run: |
         WQP_VERSION=$(python -c "import wqp; print(wqp.__version__)")
-        echo export WQP_VERSION=$WQP_VERSION >> $BASH_ENV
+        echo "export WQP_VERSION=$WQP_VERSION" >> $BASH_ENV
         echo Delivering version $WQP_VERSION...
 
     - name: Build Package
