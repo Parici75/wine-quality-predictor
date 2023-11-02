@@ -1,9 +1,9 @@
-from distutils.util import convert_path
+import os
 
 import setuptools
 
 main_ns = {}
-ver_path = convert_path("wqp/__init__.py")
+ver_path = os.path.abspath("wqp/__init__.py")
 with open(ver_path) as ver_file:
     exec(ver_file.read(), main_ns)
 
