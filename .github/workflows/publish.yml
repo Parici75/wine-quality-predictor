@@ -21,7 +21,6 @@ jobs:
       run: |
         WQP_VERSION=$(python -c "import wqp; print(wqp.__version__)")
         echo "export WQP_VERSION=$WQP_VERSION" >> $GITHUB_ENV
-        - name: Test
         echo Delivering version $WQP_VERSION...
 
     - name: Build Package
