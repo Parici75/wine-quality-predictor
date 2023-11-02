@@ -25,6 +25,7 @@ jobs:
 
     - name: Build Package
       run: |
+        pip install setuptools
         python setup.py sdist
         echo export TAR_FILE="dist/wqp-$WQP_VERSION.tar.gz" >> $GITHUB_ENV
 
