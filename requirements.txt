@@ -1,1 +1,2 @@
 -e . # This line will tell pip to install your package as editable mode, convenient for development.
+pytest
