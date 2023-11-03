@@ -18,21 +18,22 @@ jobs:
         python-version: '3.x'
 
     - name: Get version
+      id: version
       run: |
         WQP_VERSION=$(python -c "import wqp; print(wqp.__version__)")
         echo "export WQP_VERSION=$WQP_VERSION" >> $GITHUB_ENV
-        echo Delivering version $WQP_VERSION...
+        echo Packaging version $WQP_VERSION...
 
     - name: Build Package
       run: |
         pip install setuptools
         python setup.py sdist
-        echo export TAR_FILE="dist/wqp-$WQP_VERSION.tar.gz" >> $GITHUB_ENV
 
     - name: Publish on GemFury
       env: 
         FURY_PUSH_TOKEN: ${{ secrets.FURY_PUSH_TOKEN}}
         FURY_USER_NAME: ${{ secrets.FURY_PUSH_TOKEN}}
       run: |
+        echo "export TAR_FILE=@dist/wqp-${WQP_VERSION}.tar.gz" >> $GITHUB_ENV
         echo Pushing file $TAR_FILE to gemfury...
-        curl -F "package=@dist/wqp-$WQP_VERSION.tar.gz" "https://$FURY_PUSH_TOKEN@push.fury.io/$FURY_USER_NAME/"
+        curl -F "package=$TAR_FILE" "https://$FURY_PUSH_TOKEN@push.fury.io/$FURY_USER_NAME/"
